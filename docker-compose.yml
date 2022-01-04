@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+#  app:
+#    image: ghcr.io/p12s:using-orm-with-db-0.0.1
+#    ports:
+#      - "8080:8080"
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 5s
+#        max_attempts: 3
+#        window: 60s
+  db:
+    restart: always
+    image: postgres:14.1
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+    ports:
+      - 5432:5432

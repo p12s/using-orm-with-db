@@ -1,0 +1,15 @@
+mode: atomic
+github.com/p12s/using-orm-with-db/internal/config/config.go:33.29,36.57 2 2
+github.com/p12s/using-orm-with-db/internal/config/config.go:40.2,40.67 1 1
+github.com/p12s/using-orm-with-db/internal/config/config.go:44.2,44.17 1 1
+github.com/p12s/using-orm-with-db/internal/config/config.go:36.57,38.3 1 1
+github.com/p12s/using-orm-with-db/internal/config/config.go:40.67,42.3 1 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/handler.go:16.53,18.2 1 1
+github.com/p12s/using-orm-with-db/internal/transport/rest/handler.go:21.44,35.2 4 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/health.go:9.66,15.16 2 1
+github.com/p12s/using-orm-with-db/internal/transport/rest/health.go:20.2,20.25 1 1
+github.com/p12s/using-orm-with-db/internal/transport/rest/health.go:15.16,18.3 2 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/middleware.go:8.56,9.71 1 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/middleware.go:9.71,13.3 1 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/response.go:10.91,16.2 4 0
+github.com/p12s/using-orm-with-db/internal/transport/rest/response.go:19.60,23.2 3 1

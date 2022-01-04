@@ -1,0 +1,50 @@
+# https://taskfile.dev/#/installation
+version: '3'
+
+silent: true
+
+vars:
+  REGISTRY: ghcr.io
+  PROJECT: p12s
+  SERVICE: using-orm-with-db
+  IMAGE_TAG: 0.0.1
+
+tasks:
+  default:
+    task -l
+
+  unit:
+    cmds:
+      - echo "Unit..."
+      - go test -coverprofile=coverage.txt -covermode=atomic ./...
+
+  unit-v:
+    cmds:
+      - echo "Unit -v ..."
+      - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+  cover:
+    cmds:
+      - echo "Cover..."
+      - go tool cover -func=coverage.txt
+
+  cover-h:
+    cmds:
+      - echo "Cover html..."
+      - go tool cover -html=coverage.txt
+
+  lint:
+    cmds:
+      - echo "Lint..."
+      - golangci-lint run
+
+  build:
+    cmds:
+      - echo "Build..."
+      - go build cmd/main.go
+
+  mock:
+    cmds:
+      - echo "Mock..."
+      - go generate ./...
+
