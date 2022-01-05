@@ -54,6 +54,6 @@ func (s *httpServer) WaitShutdown() error {
 	signal.Notify(done, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 
 	<-done
-	
+
 	return s.server.Shutdown(context.Background())
 }

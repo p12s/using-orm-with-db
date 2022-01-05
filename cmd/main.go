@@ -27,13 +27,13 @@ func main() {
 	// check and define environment variables
 	cfg, err := config.New()
 	if err != nil {
-		log.Fatalf("environment assignment fail: %s\n", err.Error())
+		log.Errorf("environment assignment fail: %s\n", err.Error())
 	}
 
 	// repository layer (work with database)
 	db, err := repository.NewPostgresDB(cfg.Db)
 	if err != nil {
-		log.Fatalf("db initialize fail: %s\n", err.Error())
+		log.Errorf("db initialize fail: %s\n", err.Error())
 	}
 	repos := repository.NewRepository(db)
 	// service layer (business/domain logic)

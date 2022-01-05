@@ -15,8 +15,7 @@ func NewPostgresDB(cfg config.Db) (*bun.DB, error) {
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 	db := bun.NewDB(sqldb, pgdialect.New())
 
-	err := db.Ping()
-	if err != nil {
+	if err := db.Ping(); err != nil {
 		return nil, fmt.Errorf("db ping error: %w", err)
 	}
 

@@ -8,7 +8,7 @@ import (
 
 // ErrorResponse - when not Ok
 func ErrorResponse(w http.ResponseWriter, statusCode int, userMessage, logMessage string) {
-	_, _ = fmt.Fprintf(os.Stderr, "fail occured: %s", logMessage)
+	_, _ = fmt.Fprintf(os.Stderr, "fail occurred: %s", logMessage)
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
