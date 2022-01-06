@@ -1,0 +1,23 @@
+name: Building
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # cloning current repo into docker-container
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: Install Taskfile
+        uses: arduino/setup-task@v1
+
+      - name: Building service
+        run: task build

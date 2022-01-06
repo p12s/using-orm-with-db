@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,9 +11,13 @@ import (
 func ErrorResponse(w http.ResponseWriter, statusCode int, userMessage, logMessage string) {
 	_, _ = fmt.Fprintf(os.Stderr, "fail occurred: %s", logMessage)
 
+	response, _ := json.Marshal(map[string]string{
+		"message": userMessage,
+	})
+
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
-	_, _ = w.Write([]byte(userMessage))
+	_, _ = w.Write(response)
 }
 
 // OkResponse - when Ok

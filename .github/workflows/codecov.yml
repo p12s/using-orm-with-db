@@ -1,0 +1,31 @@
+name: Codecov
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: Test account service
+        run: go test -coverprofile=coverage.txt -covermode=atomic ./...
+
+      - name: Upload coverage to Codecov (demo)
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./coverage.txt #./coverage1.xml,./coverage2.xml # optional
+          flags: unittests        # optional
+          name: codecov-umbrella  # optional
+          fail_ci_if_error: true  # optional (default = false)
+          verbose: true           # optional (default = false)

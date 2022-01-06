@@ -2,3 +2,5 @@
 /.database/
 **/.DS_Store
 .env
+main
+coverage.txt

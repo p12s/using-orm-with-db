@@ -1,54 +1,61 @@
 package rest
 
-/*
-func (h *rest.Handler) signUp(w http.ResponseWriter, r *http.Request) {
+import (
+	"encoding/json"
+	"github.com/p12s/using-orm-with-db/internal/domain"
+	"io"
+	"net/http"
+)
+
+func (h *Handler) signUp(w http.ResponseWriter, r *http.Request) {
 	reqBytes, err := io.ReadAll(r.Body)
 	if err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "error reading post-data", err.Error())
 		return
 	}
 
 	var input domain.SignUpInput
 	if err = json.Unmarshal(reqBytes, &input); err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "invalid input body", err.Error())
 		return
 	}
 
 	if err = input.Validate(); err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "invalid input body", err.Error())
 		return
 	}
 
-	err = h.services.CreateUser(r.Context(), input)
+	err = h.services.CreateAccount(input)
 	if err != nil {
-		rest.ErrorResponse(w, http.StatusInternalServerError, err.Error())
+		ErrorResponse(w, http.StatusInternalServerError, "service failure", err.Error())
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusCreated)
 }
 
-func (h *rest.Handler) signIn(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) signIn(w http.ResponseWriter, r *http.Request) {
 	reqBytes, err := io.ReadAll(r.Body)
 	if err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "error reading post-data", err.Error())
 		return
 	}
 
 	var input domain.SignInInput
 	if err = json.Unmarshal(reqBytes, &input); err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "invalid input body", err.Error())
 		return
 	}
 
+	// TODO maybe return more specific error texts - what is wrong (email ...)
 	if err = input.Validate(); err != nil {
-		rest.ErrorResponse(w, http.StatusBadRequest, err.Error())
+		ErrorResponse(w, http.StatusBadRequest, "invalid input body", err.Error())
 		return
 	}
 
-	token, err := h.services.GetUserByCredentials(r.Context(), input.Email, input.Password)
+	token, err := h.services.GetTokenByCredentials(input)
 	if err != nil {
-		rest.ErrorResponse(w, http.StatusInternalServerError, err.Error())
+		ErrorResponse(w, http.StatusForbidden, "invalid input body", err.Error())
 		return
 	}
 
@@ -56,12 +63,9 @@ func (h *rest.Handler) signIn(w http.ResponseWriter, r *http.Request) {
 		"token": token,
 	})
 	if err != nil {
-		rest.ErrorResponse(w, http.StatusInternalServerError, err.Error())
+		ErrorResponse(w, http.StatusInternalServerError, "service failure", err.Error())
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write(response)
+	OkResponse(w, response)
 }
-*/
