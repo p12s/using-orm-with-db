@@ -22,9 +22,10 @@
 
 </div>
 </div>
-
-# Tasks
-![Go](https://github.com/p12s/using-orm-with-db/blob/main/gopher.png?raw=true)  
+  
+![Go](https://github.com/p12s/using-orm-with-db/blob/main/gopher.jpeg?raw=true)  
+  
+# Tasks 
 Using the ORM to do:  
 - simple queries (read from one table)  
 - queries with adjacent tables (read from merged tables)  
